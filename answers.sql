@@ -1,13 +1,204 @@
--- p.65 5
+-- p.85 5
 SELECT
-  EmployeeName
-, Height
-, Weight
+  EmployeeID
+, COUNT(*) AS Žx‹‹‰ñ”
+, AVG(Amount) AS •½‹ÏŽx‹‹Šz
 FROM
-  Employees
-WHERE
-  Weight >= 60
+  Salary
+GROUP BY
+  EmployeeID
 ;
+
+-- p.85 4
+-- SELECT
+--   BloodType
+-- , AVG(Height) AS •½‹Ïg’·
+-- , AVG(Weight) AS •½‹Ï‘Ìd
+-- FROM
+--   Employees
+-- GROUP BY
+--   BloodType
+-- ;
+
+-- p.85 3
+-- SELECT
+--   CustomerID AS ŒÚ‹qID
+-- , ProductID AS ¤•iID
+-- , SUM(Quantity) AS ”—Ê
+-- FROM
+--   Sales
+-- GROUP BY
+--   CustomerID
+-- , ProductID
+-- ;
+
+-- p.85 2
+-- SELECT
+--   EmployeeID AS ŽÐˆõID
+-- , SUM(Amount) AS ‡Œv
+-- FROM
+--   Salary
+-- GROUP BY
+--   EmployeeID
+-- ;
+
+-- p.85 1
+-- SELECT
+--   CustomerID AS ŒÚ‹qID
+-- , COUNT(*) AS Œ”
+-- FROM
+--   Sales
+-- GROUP BY
+--   CustomerID
+-- ;
+
+-- p.85 example
+-- SELECT
+--   PrefecturalID AS “s“¹•{Œ§
+-- , COUNT(*) AS ŒÚ‹q”
+-- FROM
+--   Customers
+-- GROUP BY PrefecturalID
+-- ;
+
+
+-- p.77 5
+-- ƒƒ“ƒpƒ^[ƒ“‚·‚¬‚é‚Ì‚ÅA‚Æ‚Î‚·
+
+-- p.77 4
+-- SELECT
+--   SaleID
+-- , Quantity
+-- , CASE
+--     WHEN Quantity >= 10 THEN 'A'
+--     ELSE 'B'
+--   END AS ƒ‰ƒ“ƒN
+-- FROM
+--   Sales
+-- ;
+
+-- p.77 3
+-- SELECT
+--   EmployeeName
+-- , Weight
+-- , CASE
+--     WHEN Weight < 60 THEN 'A'
+--     WHEN Weight < 70 THEN 'B'
+--     WHEN Weight < 80 THEN 'C'
+--     ELSE 'D'
+--   END AS ƒ‰ƒ“ƒN
+-- FROM
+--   Employees
+-- ;
+
+-- p.77 2
+-- SELECT
+--   SalaryID AS ‹‹—^ID
+-- , Amount
+-- , CASE
+--     WHEN Amount < 150000 THEN 'D'
+--     WHEN Amount < 300000 THEN 'C'
+--     WHEN Amount < 500000 THEN 'B'
+--     ELSE 'A'
+--   END AS ƒ‰ƒ“ƒN
+-- FROM
+--   Salary
+-- ;
+
+-- p.77 1
+-- SELECT
+--   EmployeeName AS ŽÐˆõ–¼
+-- , CASE
+--     WHEN Height < 160 THEN 'A'
+--     WHEN Height < 170 THEN 'B'
+--     ELSE 'C'
+--   END AS ƒ‰ƒ“ƒN
+-- FROM
+--   Employees
+-- ;
+
+-- p.77 example
+-- SELECT
+--   ProductName AS ¤•i–¼
+-- , CASE
+--     WHEN Price < 1000 THEN 'C'
+--     WHEN Price < 2000 THEN 'B'
+--     ELSE 'A'
+--   END AS ƒ‰ƒ“ƒN
+-- FROM
+--   Products
+-- ;
+
+-- p.70 5
+-- ESLECT
+--   *
+-- FROM
+--   Customers
+-- WHERE
+--   CustomerName NOT LIKE '%Š”Ž®‰ïŽÐ%'
+--   AND
+--   Address LIKE '%]ŒËì‹æ%'
+-- ;
+
+-- p.70 4
+-- SELECT
+--   EmployeeName
+-- , Height
+-- FROM
+--   Employees
+-- WHERE
+--   EmployeeName LIKE '%ƒŠ%'
+--   AND
+--   Height <= 160
+-- ;
+
+-- p.70 3
+-- SELECT
+--   COUNT(*)
+-- FROM
+--   Customers
+-- WHERE
+--   CustomerName NOT LIKE '%Š”Ž®‰ïŽÐ%'
+-- ;
+
+-- p.70 2
+-- SELECT
+--   -- *
+--   AVG(Height)
+-- FROM
+--   Employees
+-- WHERE
+--   EmployeeName LIKE '%[%'
+-- ;
+
+-- p.70 1
+-- SELECT
+--   CustomerName
+-- FROM
+--   Customers
+-- WHERE
+--   CustomerName LIKE '%Š”Ž®‰ïŽÐ%'
+-- ;
+
+-- p.70 example
+-- SELECT
+--   COUNT (*) AS Žq‚Ì‚Â‚­ŽÐˆõ‚Ìl”
+-- FROM
+--   Employees
+-- WHERE
+--   EmployeeName LIKE '%Žq'
+-- ;
+
+-- p.65 5
+-- SELECT
+--   EmployeeName
+-- , Height
+-- , Weight
+-- FROM
+--   Employees
+-- WHERE
+--   Weight >= 60
+-- ;
 
 -- p.65 4
 -- SELECT
