@@ -1,13 +1,180 @@
+-- p.100 5
+-- SELECT
+--   ProductID
+-- , SUM(Quantity)
+-- FROM
+--   Sales
+-- WHERE
+--   SaleDate > '2007-06-01'
+-- GROUP BY
+--   ProductID
+-- HAVING
+--   SUM(Quantity) >= 200
+-- ;
+
+-- p.100 4
+-- SELECT
+--   BloodType AS 血液型
+-- , COUNT(*) AS データ件数
+-- FROM
+--   Employees
+-- WHERE
+--   Height >= 165
+-- GROUP BY
+--   BloodType
+-- HAVING
+--   COUNT(*) >= 5
+-- ;
+
+-- p.100 3
+-- SELECT
+--   ProductID
+-- , COUNT(*)
+-- FROM
+--   Sales
+-- WHERE
+--   ProductID BETWEEN 20 AND 30
+-- GROUP BY
+--   ProductID
+-- HAVING
+--   COUNT(*) >= 30
+-- ;
+
+-- p.100 2
+-- SELECT
+--   EmployeeID AS 社員ID
+-- , COUNT(*) AS 支給回数
+-- FROM
+--   Sales
+-- WHERE
+--   ProductID BETWEEN 20 AND 30
+-- GROUP BY
+--   EmployeeID
+-- HAVING
+--   COUNT(*) >= 12
+-- ;
+
+-- p.100 2
+-- SELECT
+--   EmployeeID
+-- , COUNT(*)
+-- FROM
+--   Salary
+-- WHERE
+--   EmployeeID >= 20
+-- GROUP BY
+--   EmployeeID
+-- HAVING
+--   COUNT(*) >= 12
+
+
+-- p.100 1
+-- SELECT
+--   PrefecturalID
+-- , COUNT(*)
+-- FROM
+--   Customers
+-- WHERE
+--   PrefecturalID >= 10
+-- GROUP BY
+--   PrefecturalID
+-- HAVING
+--   COUNT(*) >= 2
+-- ;
+
+-- p.100 example
+-- SELECT
+--   PrefecturalID
+-- , COUNT(*)
+-- FROM
+--   Customers
+-- WHERE
+--   CustomerClassID = 1
+-- GROUP BY
+--   PrefecturalID
+-- HAVING
+--   COUNT(*) >= 2
+-- ;
+
+-- p.92 5
+-- SELECT
+--   ProductID AS 商品ID
+-- , SUM(Quantity) AS 数量合計
+-- FROM
+--   Sales
+-- GROUP BY
+--   ProductID
+-- ;
+
+-- p.92 4
+-- SELECT
+--   BloodType
+-- , COUNT(*) AS データ件数
+-- FROM
+--   Employees
+-- GROUP BY
+--   BloodType
+-- HAVING
+--   COUNT(*) >= 10
+-- ;
+
+-- p.92 3
+-- SELECT
+--   ProductID
+-- , COUNT(*)
+-- FROM
+--   Sales
+-- GROUP BY
+--   ProductID
+-- HAVING
+--   COUNT(*) BETWEEN 10 and 50
+-- ;
+
+-- p.92 2
+-- SELECT
+--   PrefecturalID
+-- FROM
+--   Customers
+-- GROUP BY
+--   PrefecturalID
+-- HAVING
+--   COUNT(*) >= 2
+-- ;
+
+-- p.92 1
+-- SELECT
+--   EmployeeID
+-- , COUNT(*)
+-- FROM
+--   Salary
+-- GROUP BY
+--   EmployeeID
+-- HAVING
+--   COUNT(*) < 12
+-- ;
+
+-- p.92 example
+-- SELECT
+--   PrefecturalID AS 都道府県
+-- , COUNT(*) AS 顧客数
+-- FROM
+--   Customers
+-- GROUP BY
+--   PrefecturalID
+-- HAVING
+--   COUNT(*) >= 3
+-- ;
+
 -- p.85 5
-SELECT
-  EmployeeID
-, COUNT(*) AS 支給回数
-, AVG(Amount) AS 平均支給額
-FROM
-  Salary
-GROUP BY
-  EmployeeID
-;
+-- SELECT
+--   EmployeeID
+-- , COUNT(*) AS 支給回数
+-- , AVG(Amount) AS 平均支給額
+-- FROM
+--   Salary
+-- GROUP BY
+--   EmployeeID
+-- ;
 
 -- p.85 4
 -- SELECT
