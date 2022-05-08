@@ -1,3 +1,218 @@
+-- p.135 3
+SELECT
+  productid
+, productname
+FROM
+  products
+WHERE
+  productid IN
+  ( 
+    SELECT
+      productid
+    FROM
+      sales
+    GROUP BY
+      productid
+    HAVING
+      SUM(quantity) >= 100
+  )
+;
+
+-- p.135 2
+-- SELECT
+--   s.saleid
+-- , s.quantity
+-- , s.customerid
+-- , c.customername
+-- FROM
+--   sales as s
+--     JOIN
+--   customers as c
+--     ON s.customerid = c.customerid
+-- WHERE
+--   quantity >= 100
+-- ;
+
+-- p.135 1
+-- SELECT
+--   employeeid
+-- , employeename
+-- FROM
+--   employees
+-- WHERE
+--   employeeid IN
+--   (SELECT
+--      employeeid
+--    FROM
+--      salary
+--    GROUP BY
+--      employeeid
+--    HAVING
+--      MAX(amount) > 300000
+--   )
+-- ;
+
+-- p.173 example
+-- SELECT
+--   p.productname
+-- , s1.saledate
+-- FROM
+--   sales AS s1
+--     JOIN
+--   products AS p
+--     ON s1.productid = p.productid
+-- WHERE
+--   s1.quantity >
+--   (
+--     SELECT
+--       AVG( quantity )
+--     FROM
+--       sales AS s2
+--     WHERE
+--       s1.productid = s2.productid
+--   )
+-- ORDER BY p.productid, s1.saledate DESC
+-- ;
+
+-- p.167 example
+-- SELECT
+--   p1.productname AS è§ïiñº1
+-- , p2.productname AS è§ïiñº2
+-- , (p1.price + p2.price) AS ÉZÉbÉgâøäi
+-- FROM
+--   products as p1
+--     JOIN
+--   products as p2
+--     ON p1.productid < p2.productid
+--     AND p1.categoryid <> p2.categoryid
+-- WHERE
+--   ( p1.price + p2.price ) > 2500
+-- ;
+
+-- p.159 example
+-- SELECT
+--   p.ProductName
+-- , AVG( p.Price *
+--        CASE
+--          WHEN s.quantity IS NULL THEN 0
+--          ELSE s.quantity
+--        END
+--      ) AS ïΩãœîÃîÑâøäi
+-- FROM
+--   Products AS p
+--     LEFT OUTER JOIN
+--   Sales AS s
+--     ON s.ProductID = p.ProductID
+-- GROUP BY
+--   p.ProductName
+-- HAVING
+--   AVG( p.Price *
+--        CASE
+--          WHEN s.quantity IS NULL THEN 0
+--          ELSE s.quantity
+--        END
+--      ) = 0
+-- ;
+
+-- p.151 example
+-- SELECT
+--   d.DepartmentName AS ïîñÂñº
+-- , AVG(s.Amount) AS ïîñÂï ïΩãœããó^äz
+-- FROM
+--   Salary AS s
+--     JOIN
+--   BelongTo AS b
+--     ON s.EmployeeID = b.EmployeeID
+--       JOIN
+--     Departments AS d
+--       ON b.DepartmentID = d.DepartmentID
+-- GROUP BY
+--   d.DepartmentName
+-- ;
+
+-- p.141 example
+-- SELECT
+--   Customers.PrefecturalID
+-- , Prefecturals.PrefecturalName AS ìsìπï{åß
+-- , COUNT(*) AS å⁄ãqêî
+-- FROM
+--   Customers
+--     JOIN
+--   Prefecturals
+--     ON Customers.PrefecturalID = Prefecturals.PrefecturalID
+-- WHERE
+--   Customers.CustomerClassID = 1
+-- GROUP BY
+--   Customers.PrefecturalID
+-- , Prefecturals.PrefecturalName
+-- ;
+
+-- p.130 example
+-- SELECT
+--   *
+-- FROM
+--   Products
+-- WHERE
+--   ProductID NOT IN
+--   (
+--     SELECT
+--       ProductID
+--     FROM
+--       Sales
+--   )
+-- ;
+
+-- p.121 example
+-- SELECT DISTINCT
+--   Address AS èZèä
+-- FROM
+--   Customers
+-- ;
+
+-- p.113 example
+-- SELECT
+--   ProductName
+-- , Price
+-- FROM
+--   Products
+-- ORDER BY
+--   Price DESC
+-- , ProductName
+-- ;
+
+-- p.103 example
+-- SELECT
+--   HireFiscalYear
+-- , SUM(
+--     CASE
+--       WHEN BloodType = 'A' THEN 1
+--       ELSE 0
+--     END
+--   ) AS Aå^
+-- , SUM(
+--     CASE
+--       WHEN BloodType = 'B' THEN 1
+--       ELSE 0
+--     END
+--   ) AS Bå^
+-- , SUM(
+--     CASE
+--       WHEN BloodType = 'O' THEN 1
+--       ELSE 0
+--     END
+--   ) AS Oå^
+-- , SUM(
+--     CASE
+--       WHEN BloodType = 'AB' THEN 1
+--       ELSE 0
+--     END
+--   ) AS ABå^
+-- FROM
+--   Employees
+-- GROUP BY
+--   HireFiscalYear
+-- ;
+
 -- p.100 5
 -- SELECT
 --   ProductID
