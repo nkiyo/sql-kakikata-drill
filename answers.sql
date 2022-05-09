@@ -1,22 +1,165 @@
+-- p.147 5
+
+-- p.147 4
+-- SELECT
+--   s.quantity
+-- , c.customername
+-- , e.employeename
+-- , p.productname
+-- FROM
+--   sales as s
+-- , customers as c
+-- , employees as e
+-- , products as p
+-- WHERE
+--   s.customerid = c.customerid
+--   AND
+--   s.employeeid = e.employeeid
+--   AND
+--   s.productid = p.productid
+--   AND
+--   s.quantity >= 200
+-- ;
+
+-- p.146 sample
+-- SELECT
+--   c.prefecturalid
+-- , p.prefecturalname
+-- , COUNT(*) AS ŒÚ‹q”
+-- FROM
+--   customers as c
+-- , prefecturals as p
+-- WHERE
+--   c.prefecturalid = p.prefecturalid
+-- GROUP BY
+--   c.prefecturalid
+-- , p.prefecturalname
+-- ;
+
+-- p.147 3
+-- SELECT
+--   s.productid
+-- , p.productname
+-- , SUM(s.quantity)
+-- FROM
+--   sales as s
+--     JOIN
+--   products as p
+--     ON s.productid = p.productid
+-- GROUP BY
+--   s.productid
+-- , p.productname
+-- HAVING
+--   SUM(s.quantity) >= 300
+-- ;
+
+-- p.147 2
+-- SELECT
+--   s.quantity
+-- , c.customername
+-- , p.productname
+-- , e.employeename
+-- FROM
+--   sales as s
+--     JOIN
+--   customers as c
+--     ON s.customerid = c.customerid
+--     JOIN
+--   employees as e
+--     ON s.employeeid = e.employeeid
+--     JOIN
+--   products as p
+--     ON s.productid = p.productid
+-- WHERE
+--   s.quantity >= 200
+-- ;
+
+-- p.147 1
+-- SELECT
+--   e.employeeid
+-- , e.employeename
+-- , s.paydate
+-- , s.amount
+-- FROM
+--   salary as s
+--     JOIN
+--   employees as e
+--     ON s.employeeid = e.employeeid
+-- ORDER BY
+--   e.employeeid
+-- ;
+
+-- p.135 5
+-- SELECT
+--   s.saleid
+-- , s.quantity
+-- , s.customerid
+-- , c.customername
+-- , s.productid
+-- , (
+--   SELECT
+--     productname
+--   FROM
+--     products as p
+--   WHERE
+--     p.productid = s.productid
+--   )
+-- FROM
+--   sales as s
+--     JOIN
+--   customers as c
+--     ON s.customerid = c.customerid
+-- WHERE
+--   quantity >= 100
+-- ;
+
+
+-- p.135 4
+-- SELECT
+--   employeeid
+-- , employeename
+-- , (
+--     SELECT
+--       MAX(amount)
+--     FROM
+--       salary
+--     WHERE
+--       employeeid = salary.employeeid
+--   ) AS Å‚‹‹—^Šz
+-- FROM
+--   Employees
+-- WHERE
+--   EmployeeID IN (
+--     SELECT
+--       employeeid
+--     FROM
+--       salary
+--     GROUP BY
+--       employeeid
+--     HAVING
+--       MAX(amount) > 300000
+--   )
+-- ;
+
 -- p.135 3
-SELECT
-  productid
-, productname
-FROM
-  products
-WHERE
-  productid IN
-  ( 
-    SELECT
-      productid
-    FROM
-      sales
-    GROUP BY
-      productid
-    HAVING
-      SUM(quantity) >= 100
-  )
-;
+-- SELECT
+--   productid
+-- , productname
+-- FROM
+--   products
+-- WHERE
+--   productid IN
+--   ( 
+--     SELECT
+--       productid
+--     FROM
+--       sales
+--     GROUP BY
+--       productid
+--     HAVING
+--       SUM(quantity) >= 100
+--   )
+-- ;
 
 -- p.135 2
 -- SELECT
