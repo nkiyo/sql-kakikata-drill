@@ -1,25 +1,226 @@
--- p.147 5
+-- p.170 4
 
--- p.147 4
+-- p.170 3
 -- SELECT
---   s.quantity
+--   e1.employeename
+-- , e1.birthday
+-- , e2.employeename
+-- , e2.birthday
+-- FROM
+--   employees as e1
+--     JOIN
+--   employees as e2
+--     ON e1.birthday > e2.birthday
+-- ;
+
+-- p.170 2
+-- SELECT
+--   c1.customername AS 顧客名1
+-- , c1.prefecturalid
+-- , c2.customername AS 顧客名2
+-- , c2.prefecturalid
+-- FROM
+--   customers as c1
+--     JOIN
+--   customers c2
+--     ON c1.prefecturalid = c2.prefecturalid
+--     AND c1.customerid < c2.customerid
+-- ;
+
+-- p.170 1
+-- SELECT
+--   p1.productname AS 商品名1
+-- , p2.productname AS 商品名2
+-- FROM
+--   products as p1
+--     JOIN
+--   products as p2
+--     ON p1.categoryid = p2.categoryid
+--     AND p1.productid < p2.productid
+-- ;
+
+-- p.164 5
+-- SELECT
+--   e.employeename
+-- , CASE
+--     WHEN sp.amount IS NULL THEN 0
+--     ELSE sp.amount
+--   END
+-- FROM
+--   employees as e
+--     LEFT OUTER JOIN
+--   (SELECT
+--     *
+--   FROM
+--     salary
+--   WHERE
+--     paydate = '2007-02-25'
+--   ) as sp
+--     ON e.employeeid = sp.employeeid
+-- ;
+
+-- p.163 4
+-- SELECT
+--   e.employeeid
+-- , SUM(
+--     CASE 
+--       WHEN s.quantity IS NULL THEN 0
+--       ELSE s.quantity
+--     END
+--   )
+-- FROM
+--   employees as e
+--     LEFT OUTER JOIN
+--   sales as s
+--     ON e.employeeid = s.employeeid
+-- GROUP BY
+--   e.employeeid
+-- ;
+
+-- p.163 3 任意カラムを0/1に変換してSUMで件数カウントする方法を知った
+-- SELECT
+--   p.prefecturalid
+-- , SUM(
+--      CASE
+--       WHEN c.prefecturalid IS NULL THEN 0
+--       ELSE 1
+--      END
+--      )
+-- FROM
+--   prefecturals as p
+--     LEFT OUTER JOIN
+--   customers as c
+--     ON p.prefecturalid = c.prefecturalid
+-- GROUP BY
+--   p.prefecturalid
+-- ;
+
+-- p.163 2
+-- SELECT
+--   e.employeeid AS 社員ID
+-- , MAX(e.employeename) AS 社員名
+-- , COALESCE(SUM(s.quantity), 0) AS 販売数
+-- FROM
+--   employees as e
+--     LEFT OUTER JOIN
+--   sales as s
+--     ON e.employeeid = s.employeeid
+-- GROUP BY
+--   e.employeeid
+-- ;
+
+-- p.163 1
+-- SELECT
+--   c.customerid
 -- , c.customername
--- , e.employeename
--- , p.productname
+-- , SUM(
+--     CASE
+--       WHEN s.saleid IS NULL THEN 0
+--       ELSE s.quantity
+--     END
+--   )
+-- FROM
+--   customers as c
+--     LEFT OUTER JOIN
+--   sales as s
+--     ON c.customerid = s.customerid
+-- --WHERE
+-- --  s.saleid IS NULL
+-- GROUP BY
+--   c.customerid
+-- ;
+
+-- p.155 4,5
+-- とばす。JOINなしで連結する問題。
+
+-- p.155 3
+-- SELECT
+--   c.customerclassid
+-- , MAX(s.quantity)
+-- , MAX(cc.customerclassname)
 -- FROM
 --   sales as s
--- , customers as c
--- , employees as e
--- , products as p
--- WHERE
---   s.customerid = c.customerid
---   AND
---   s.employeeid = e.employeeid
---   AND
---   s.productid = p.productid
---   AND
---   s.quantity >= 200
+--     JOIN
+--   customers as c
+--     ON s.customerid = c.customerid
+--     JOIN
+--   customerclasses as cc
+--     ON c.customerclassid = cc.customerclassid
+-- GROUP BY
+--   c.customerclassid
 -- ;
+
+-- p.155 2
+-- SELECT
+--   c.prefecturalid
+-- , MAX(p.prefecturalname)
+-- , SUM(s.quantity)
+-- FROM
+--   sales as s
+--     JOIN
+--   customers as c
+--     ON s.customerid = c.customerid
+--     JOIN
+--   prefecturals as p
+--     ON c.prefecturalid = p.prefecturalid
+-- GROUP BY
+--   c.prefecturalid
+-- ;
+
+-- p.155 1
+-- SELECT
+--   p.categoryid
+-- , MAX(p.categoryid)
+-- , MAX(c.categoryname)
+-- , SUM(s.quantity)
+-- FROM
+--   sales as s
+--     JOIN
+--   products as p
+--     ON s.productid = p.productid
+--     JOIN
+--   categories as c
+--     ON p.categoryid = c.categoryid
+-- GROUP BY
+--   p.categoryid
+-- ;
+
+-- p.147 5
+-- SELECT
+--   c.customername
+-- , p.prefecturalname
+-- , cc.customerclassname
+-- FROM
+--   customers as c
+-- , prefecturals as p
+-- , customerclasses as cc
+-- WHERE
+--   c.prefecturalid = p.prefecturalid
+--   AND
+--   c.customerclassid = cc.customerclassid
+-- ORDER BY c.prefecturalid
+-- ;
+
+-- p.147 4
+SELECT
+  s.quantity
+, c.customername
+, e.employeename
+, p.productname
+FROM
+  sales as s
+, customers as c
+, employees as e
+, products as p
+WHERE
+  s.customerid = c.customerid
+  AND
+  s.employeeid = e.employeeid
+  AND
+  s.productid = p.productid
+  AND
+  s.quantity >= 200
+;
 
 -- p.146 sample
 -- SELECT
