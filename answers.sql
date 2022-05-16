@@ -1,4 +1,484 @@
+-- p.226 5
+INSERT
+INTO sales
+(
+  saleid
+, quantity
+, customerid
+, employeeid
+, saledate
+)
+SELECT
+  p.productid + 50000
+, 30
+, 15
+, 2
+, '2007-09-10'
+FROM
+  products as p
+WHERE
+  p.categoryid = 5
+;
+
+
+SELECT
+  p.productid + 50000
+, 30
+, 15
+, 2
+, '2007-09-10'
+FROM
+  products as p
+WHERE
+  p.categoryid = 5
+;
+
+-- p.226 4
+INSERT
+INTO sales
+(
+  saleid
+, quantity
+, employeeid
+, productid
+, saledate
+)
+SELECT
+  c.customerid + 40000
+, 20
+, 5
+, 21
+, '2007-09-05'
+FROM
+  customers as c
+WHERE
+  c.prefecturalid = 8
+;
+
+SELECT
+  c.customerid + 40000
+, 20
+, 5
+, 21
+, '2007-09-05'
+FROM
+  customers as c
+WHERE
+  c.prefecturalid = 8
+;
+
+
+
+-- p.226 3
+INSERT
+INTO sales
+(
+  saleid
+, quantity
+, customerid
+, productid
+, saledate 
+)
+SELECT
+  e.employeeid + 30000
+, 10
+, 10
+, 20
+, '2007-09-01'
+FROM
+  employees as e
+WHERE
+  e.bloodtype = 'O'
+;
+
+
+SELECT
+  e.employeeid + 30000
+, 10
+, 10
+, 20
+, '2007-09-01'
+FROM
+  employees as e
+WHERE
+  e.bloodtype = 'O'
+;
+
+-- p.226 2
+INSERT
+INTO customers
+(
+  customercode
+, customerid
+, address
+, prefecturalid
+, customerclassid
+, customername
+)
+SELECT
+  e.employeeid + 10000
+, e.employeeid + 10000
+, 'ç]åÀêÏãÊêºè¨ä‚'
+, 13
+, 2
+, e.employeename
+FROM
+  employees as e
+WHERE
+  e.hirefiscalyear <= 1988
+;
+
+
+SELECT
+  e.employeeid + 10000
+, e.employeeid + 10000
+, 'ç]åÀêÏãÊêºè¨ä‚'
+, 13
+, 2
+, e.employeename
+FROM
+  employees as e
+WHERE
+  e.hirefiscalyear <= 1988
+;
+
+-- p.226 1
+INSERT
+INTO salary
+(
+  salaryid
+, employeeid
+, paydate
+, amount
+)
+SELECT
+  e.employeeid + 20000
+, e.employeeid
+, '2007-10-01'
+, 20000
+FROM
+  employees as e
+WHERE
+  e.hirefiscalyear <= 1993
+;
+
+
+SELECT
+  e.employeeid + 20000
+, e.employeeid
+, e.hirefiscalyear
+, 20000
+FROM
+  employees as e
+WHERE
+  e.hirefiscalyear <= 1993
+;
+
+
+
+-- p.221 example
+INSERT
+INTO salary
+(
+  salaryid
+, employeeid
+, paydate
+, amount
+)
+  SELECT
+    s.employeeid + 10000
+  , s.employeeid
+  , '2008-02-14'
+  , SUM(s.quantity * p.price) * 0.0001
+  FROM
+    sales as s
+      JOIN
+    products as p
+      ON s.productid = p.productid
+  GROUP BY 
+    s.employeeid
+  , s.employeeid + 10000
+;
+
+
+SELECT
+  s.employeeid + 10000
+, s.employeeid
+, '2008-02-14'
+, SUM(s.quantity * p.price) * 0.0001
+FROM
+  sales as s
+    JOIN
+  products as p
+    ON s.productid = p.productid
+GROUP BY 
+  s.employeeid
+, s.employeeid + 10000
+;
+
+
+-- p.217 5
+INSERT
+INTO customers
+(
+  customerid
+, customername
+, address
+, customerclassid
+, prefecturalid
+)
+VALUES
+(
+  31
+, 'óLå¿âÔé–Êπè§âÔ'
+, 'òaâÃéRåßãgñÏåS'
+, 1
+, 30
+)
+;
+-- p.217 4
+INSERT
+INTO salary
+(
+  salaryid
+, employeeid
+, paydate
+, amount
+)
+VALUES
+(
+  354
+, 31
+, '2007-09-05'
+, 100000
+)
+;
+
+-- p.217 3
+INSERT
+INTO sales
+(
+  saleid
+, quantity
+, customerid
+, productid
+, employeeid
+, saledate
+)
+VALUES
+(
+  1007
+, 10
+, 1
+, 40
+, 31
+, '2007-09-01'
+)
+;
+
+-- p.217 2
+INSERT
+INTO belongto
+(
+  belongid
+, employeeid
+, departmentid
+, startdate
+)
+VALUES
+(
+  35
+, 31
+, 1
+, '2007-09-01'
+)
+;
+
+-- p.217 1
+INSERT
+INTO employees
+(
+  employeeid
+, employeename
+, height
+, weight
+, email
+, hirefiscalyear
+, birthday
+, bloodtype
+)
+VALUES
+(
+  31
+, 'ÉÇÉNÉÇÉN'
+, 170
+, 60
+, 'moku@nekoyasudo'
+, 2007
+, '1989-08-08'
+, 'AB'
+)
+;
+
+-- p.214 example
+INSERT
+INTO products
+(
+  productid
+, productname
+, price
+, categoryid
+)
+VALUES
+(
+  101
+, 'ÉTÉJÉiÇ‹Ç¡ÇµÇÆÇÁ'
+, 270
+, 5
+)
+;
+
+-- p.179 5
+SELECT
+  p.productid
+, p.productname
+FROM
+  products as p
+WHERE
+  p.productid IN
+  (
+    SELECT
+      productid
+    FROM
+      sales
+    GROUP BY
+      productid
+    HAVING
+      AVG(quantity) <= MAX(quantity) / 10
+  )
+ORDER BY p.productid
+;
+
+
+-- SELECT
+--   productid
+-- , AVG(quantity)
+-- , MAX(quantity)
+-- FROM
+--   sales
+-- GROUP BY
+--   productid
+--HAVING
+--  MAX(quantity) / 10
+-- ;
+
+
+
+-- p.179 4
+-- Ç∑Ç≈Ç…JOINégÇ¡ÇƒèëÇ¢ÇΩÅBÇ∆ÇŒÇ∑
+
+-- p.179 3
+-- SELECT
+--   p.productid
+-- , p.productname
+-- FROM
+--   products as p
+-- WHERE
+--   NOT EXISTS
+--   (
+--     SELECT
+--       p.productid
+--     FROM
+--       sales as s
+--     WHERE
+--       p.productid = s.productid
+--   )
+-- ;
+
+-- p.179 2
+-- SELECT
+--   p.productid
+-- , p.productname
+-- FROM
+--   products as p
+-- WHERE
+--   EXISTS
+--   (
+--     SELECT
+--       p.productid
+--     FROM
+--       sales as s
+--     WHERE
+--       p.productid = s.productid
+--   )
+-- ORDER BY
+--   p.productid
+-- ;
+
+-- p.179 1
+-- SELECT
+--   s.productid
+-- , MIN(p.productname)
+-- , MAX(s.quantity)
+-- FROM
+--   sales as s
+--     JOIN
+--   products as p
+--     ON s.productid = p.productid
+-- GROUP BY
+--   s.productid
+-- ORDER BY s.productid
+-- ;
+
+
+-- p.173 example
+-- SELECT
+--   p.productname AS è§ïiñº
+-- , s1.saledate
+-- FROM
+--   sales as s1
+--     JOIN
+--   products as p
+--     ON s1.productid = p.productid
+-- WHERE
+--   s1.quantity > 
+--   (
+--     SELECT
+--       AVG(s2.quantity)
+--     FROM
+--       sales as s2
+--     WHERE
+--       s1.productid = s2.productid
+--   )
+-- ;
+
+-- p.170 5
+-- SELECT
+--   c1.customername AS å⁄ãqñº1
+-- , c1.prefecturalid
+-- , c2.customername AS å⁄ãqñº2
+-- , c2.prefecturalid
+-- FROM
+--   customers as c1
+--     JOIN
+--   customers c2
+--     ON c1.prefecturalid = c2.prefecturalid
+--     AND c1.customerid < c2.customerid
+-- WHERE
+--   c1.prefecturalid <> 13
+-- ;
+
 -- p.170 4
+SELECT
+  c1.categoryname AS ÉJÉeÉSÉäñº1
+, c2.categoryname AS ÉJÉeÉSÉäñº2
+FROM
+  categories as c1
+    JOIN
+  categories as c2
+    ON c1.categoryid <> c2.categoryid
+    AND c1.categoryid < c2.categoryid
+;
 
 -- p.170 3
 -- SELECT
