@@ -1,3 +1,205 @@
+-- p.243 example
+
+
+-- p.240 5
+UPDATE
+  products
+SET
+  price = 
+    CASE
+      WHEN price >= 1000 THEN price * 0.8
+      ELSE price
+    END
+WHERE
+  categoryid = 7
+;
+
+SELECT
+  *
+FROM
+  products
+WHERE
+  categoryid = 7
+;
+
+-- p.240 4
+UPDATE
+  sales
+SET
+  quantity = quantity + 10
+WHERE
+  customerid = 10
+--  AND
+--  productid = 5
+  AND
+  saledate >= '2007-05-31'
+;
+
+SELECT
+  *
+FROM
+  sales
+WHERE
+  customerid = 10
+--  AND
+--  productid = 5
+  AND
+  saledate >= '2007-05-31'
+;
+
+-- p.240 3
+UPDATE
+  employees
+SET
+  height = height -2
+, weight = weight + 3
+WHERE
+  bloodtype = 'AB'
+;
+
+SELECT
+  *
+FROM
+  employees
+WHERE
+  bloodtype = 'AB'
+;
+
+-- p.240 2
+UPDATE
+  salary
+SET
+  amount = amount + 20000
+WHERE
+  employeeid = 5
+  AND
+  paydate = '2007-03-25'
+;
+
+
+SELECT
+  *
+FROM
+  salary
+WHERE
+  employeeid = 5
+  AND
+  paydate = '2007-03-25'
+;
+
+-- p.240 1
+UPDATE
+  employees
+SET
+  height = height + 5
+WHERE
+  employeeid = 10
+;
+
+SELECT
+  *
+FROM
+  employees
+WHERE
+  employeeid = 10
+;
+
+-- p.237 example
+UPDATE
+  customers
+SET
+  address = 'ê¢ìcíJãÊÇΩÇ™Ç‚Çπ1íöñ⁄'
+WHERE
+  customerid = 5
+;
+
+SELECT
+  *
+FROM
+  customers
+WHERE
+  customerid = 5
+;
+
+-- p.253 5
+UPDATE
+  customers
+SET
+  customername = 
+  CASE
+    WHEN customerclassid = 1 THEN
+      customername || 'å‰íÜ'
+    ELSE
+      customername || 'ól'
+  END
+;
+
+SELECT
+  *
+FROM
+  customers
+;
+
+-- p.253 4
+UPDATE
+  departments
+SET
+  departmentname = departmentname || 'ïî'
+;
+
+SELECT
+  *
+FROM
+  departments
+;
+
+-- p.235 3
+UPDATE
+  employees
+SET
+  height = height + 2
+, weight = weight - 5
+;
+
+SELECT
+  *
+FROM
+  employees
+;
+
+-- p.235 2
+UPDATE
+  employees
+SET
+  email = email || '.co.jp'
+;
+
+SELECT
+  *
+FROM
+  employees
+;
+
+-- p.235 1
+UPDATE
+  customers
+SET
+  customercode = customercode + 1000
+;
+
+SELECT
+  *
+FROM
+  customers
+;
+
+-- p.232 example
+UPDATE
+  products
+SET
+  price = price * 0.97
+;
+
 -- p.226 5
 INSERT
 INTO sales
