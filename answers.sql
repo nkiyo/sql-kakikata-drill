@@ -1,5 +1,301 @@
--- p.243 example
+-- p.270 5
 
+
+-- p.270 4
+DELETE
+FROM
+  products
+WHERE
+  categoryid = 1
+;
+
+SELECT
+  *
+FROM
+  products
+WHERE
+  categoryid = 1
+;
+
+-- p.270 3
+DELETE
+FROM
+  customers
+WHERE
+  customerid >= 10000 
+;
+
+SELECT
+  *
+FROM
+  customers
+WHERE
+  customerid >= 10000 
+;
+
+
+-- p.270 2
+DELETE
+FROM
+  salary
+WHERE
+  employeeid = 10
+  AND
+  paydate = '2007-10-01'
+;
+
+SELECT
+  *
+FROM
+  salary
+WHERE
+  employeeid = 10
+  AND
+  paydate = '2007-10-01'
+;
+
+-- p.270 1
+DELETE
+FROM
+  sales
+WHERE
+  saleid = 1006
+;
+
+SELECT
+  *
+FROM
+  sales
+WHERE
+  saleid = 1006
+;
+
+-- p.268 example
+DELETE
+FROM
+  employees
+WHERE
+  employeeid = 17
+;
+
+SELECT
+  *
+FROM
+  employees
+WHERE
+  employeeid = 17
+;
+
+-- p.252 ‚»‚Ì6 ‚Æ‚Î‚µ‚½
+
+-- p.249 5
+UPDATE
+  salary
+SET
+  amount = amount * 1.1
+WHERE
+  employeeid IN (
+  SELECT DISTINCT
+    s.employeeid
+  FROM
+    sales as s
+      JOIN
+    customers as c
+      ON s.customerid = c.customerid
+  WHERE
+    c.customerclassid = 1
+    AND
+    s.saledate <= '2007-08-25'
+  ORDER BY
+    s.employeeid
+  )
+  AND
+  paydate = '2007-08-25'
+;
+
+SELECT
+  *
+FROM
+  salary
+WHERE
+  employeeid IN (5, 7, 8, 12, 18)
+  AND
+  paydate = '2007-08-25'
+;
+
+SELECT DISTINCT
+  s.employeeid
+FROM
+  sales as s
+    JOIN
+  customers as c
+    ON s.customerid = c.customerid
+WHERE
+  c.customerclassid = 1
+  AND
+  s.saledate <= '2007-08-25'
+ORDER BY
+  s.employeeid
+;
+
+-- p.249 4 —ÞŽ—–â‘è ‚Æ‚Î‚·
+
+-- p.249 3
+UPDATE
+  salary
+SET
+  amount = amount * 1.1
+WHERE
+  paydate = '2007-10-01'
+  AND
+  employeeid IN (
+  SELECT
+    employeeid
+  FROM
+    sales
+  GROUP BY
+    employeeid
+  HAVING
+    COUNT(*) > 50
+  )
+;
+
+SELECT
+  employeeid
+, COUNT(*)
+FROM
+  sales
+GROUP BY
+  employeeid
+HAVING
+  COUNT(*) > 50
+;
+
+SELECT
+  *
+FROM
+  salary
+WHERE
+  paydate = '2007-10-01'
+  AND
+  employeeid IN (4, 5, 7, 11, 17, 30)
+;
+
+-- p.249 2
+UPDATE
+  salary
+SET
+  amount = amount * 0.95
+WHERE
+  paydate = '2007-10-01'
+  AND
+  employeeid IN (
+  SELECT
+    employeeid
+  FROM
+    sales
+  GROUP BY
+    employeeid
+  HAVING
+    COUNT(*) < 10
+  )
+;
+
+-- employeeid = 2, 31
+SELECT
+  employeeid
+, COUNT(*)
+FROM
+  sales
+GROUP BY
+  employeeid
+HAVING
+  COUNT(*) < 10
+;
+
+SELECT
+  *
+FROM
+  salary
+WHERE
+  paydate = '2007-10-01'
+  AND
+  employeeid IN (2, 31)
+;
+
+-- p.249 1
+UPDATE
+  products
+SET
+  price = price * 0.97
+WHERE
+  productid NOT IN
+  (
+    SELECT DISTINCT
+      productid
+    FROM
+      sales
+  )
+;
+
+SELECT
+  productid
+, productname
+FROM
+  products
+WHERE
+  productid NOT IN
+  (
+  SELECT DISTINCT
+    productid
+  FROM
+    sales
+  )
+;
+
+SELECT DISTINCT
+  productid
+FROM
+  sales
+;
+
+-- p.243 example
+UPDATE
+  products
+SET
+  price = price * 1.01
+WHERE
+  productid IN
+  (
+    SELECT
+      productid
+   FROM
+      sales
+    GROUP BY
+      productid
+    HAVING
+      SUM(quantity) > 100
+  )
+;
+
+SELECT
+  *
+FROM
+  products
+;
+
+SELECT
+  productid
+, SUM(quantity)
+FROM
+  sales
+GROUP BY
+  productid
+HAVING
+  SUM(quantity) > 100
+ORDER BY
+  productid
+;
 
 -- p.240 5
 UPDATE
