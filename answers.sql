@@ -1,3 +1,4 @@
+
 -- p.270 4
 DELETE
 FROM
